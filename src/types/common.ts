@@ -15,4 +15,6 @@ type TColor = keyof typeof Colors;
 
 type TFontSize = Exclude<TStandardSizes, 'xxs'>;
 
-export type {TSpacing, TColor, TFontSize, TStandardSizes};
+type TIconSize = Exclude<TStandardSizes, 'xxs'>;
+
+export type {TSpacing, TColor, TFontSize, TStandardSizes, TIconSize};

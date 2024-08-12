@@ -1,4 +1,4 @@
-import {TFontSize} from '../types/common';
+import {TFontSize, TIconSize} from '../types/common';
 
 const Colors = {
   white: '#FFFFFF',
@@ -18,4 +18,13 @@ const FontSizes: Record<TFontSize, number> = {
   xxl: 32,
 };
 
-export {Colors, FontSizes};
+const IconSizes: Record<TIconSize, number> = {
+  xs: 8,
+  small: 12,
+  medium: 16,
+  large: 20,
+  xl: 26,
+  xxl: 32,
+};
+
+export {Colors, FontSizes, IconSizes};
