@@ -12,7 +12,8 @@ import {
 } from '@react-navigation/native-stack';
 import {Colors} from './src/styles/common';
 import {HEADER_TITLE_STYLE} from './src/styles/constants';
-import {HomeScreen} from './src/screens/HomeScreen';
+import {HomeScreen} from './src/screens/HomeScreen/HomeScreen';
+import {AddTransactionScreen} from './src/screens/AddTransactionScreen/AddTransactionScreen';
 
 const COMMON_HEADER_OPTIONS: NativeStackNavigationOptions = {
   headerBackTitleVisible: false,
@@ -24,6 +25,7 @@ const COMMON_HEADER_OPTIONS: NativeStackNavigationOptions = {
 
 type RootStackParamList = {
   HomeScreen: undefined;
+  AddTransactionScreen: undefined;
 };
 
 type RootNavigation = NavigationProp<RootStackParamList>;
@@ -45,6 +47,15 @@ const App = () => {
             options={{
               ...COMMON_HEADER_OPTIONS,
               headerTitle: 'Home',
+            }}
+          />
+          <Stack.Screen
+            name="AddTransactionScreen"
+            component={AddTransactionScreen}
+            options={{
+              ...COMMON_HEADER_OPTIONS,
+              presentation: 'modal',
+              headerTitle: 'ADD TRANSACTION',
             }}
           />
         </Stack.Navigator>
