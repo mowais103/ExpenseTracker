@@ -5,6 +5,7 @@ import {AtomIcon} from '../../components/atoms/AtomIcon';
 import {IncomeStatement} from './IncomeStatement';
 import {AddTransactionButton} from './AddTransactionButton';
 import {RootStackScreenProps} from '../../../App';
+import {Spacer} from '../../components/atoms/Spacer';
 
 type HomeScreenProps = RootStackScreenProps<'HomeScreen'>;
 
@@ -15,6 +16,7 @@ const HomeScreen = ({navigation}: HomeScreenProps) => {
         <Text style={styles.monthStyle}>Month</Text>
         <AtomIcon icon="pieChart" size="medium" />
       </View>
+      <Spacer vertical />
       <IncomeStatement />
       <AddTransactionButton
         onPress={() => navigation.navigate('AddTransactionScreen')}

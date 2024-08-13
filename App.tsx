@@ -52,7 +52,11 @@ const App = () => {
           <Stack.Screen
             name="AddTransactionScreen"
             component={AddTransactionScreen}
-            options={{headerShown: false, presentation: 'modal'}}
+            options={{
+              ...COMMON_HEADER_OPTIONS,
+              presentation: 'modal',
+              headerTitle: 'ADD TRANSACTION',
+            }}
           />
         </Stack.Navigator>
       </NavigationContainer>
