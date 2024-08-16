@@ -6,10 +6,15 @@ import {IncomeStatement} from './IncomeStatement';
 import {AddTransactionButton} from './AddTransactionButton';
 import {RootStackScreenProps} from '../../../App';
 import {Spacer} from '../../components/atoms/Spacer';
+import {useAppSelector} from '../../lib/hooks/common';
 
 type HomeScreenProps = RootStackScreenProps<'HomeScreen'>;
 
 const HomeScreen = ({navigation}: HomeScreenProps) => {
+  const transactions = useAppSelector(
+    state => state.transactionsReducer.transactions,
+  );
+  console.log('transactions', transactions);
   return (
     <AtomScreenContainer>
       <View style={styles.header}>

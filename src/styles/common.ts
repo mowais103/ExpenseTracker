@@ -7,6 +7,7 @@ const Colors = {
   creamGrey: '#F5F4F3',
   darkBlue: '#031026',
   navyBlue: '#2a3991',
+  grey: '#7F7F7F',
 };
 
 const FontSizes: Record<TFontSize, number> = {
