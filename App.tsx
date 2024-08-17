@@ -15,7 +15,8 @@ import {HEADER_TITLE_STYLE} from './src/styles/constants';
 import {HomeScreen} from './src/screens/HomeScreen/HomeScreen';
 import {AddTransactionScreen} from './src/screens/AddTransactionScreen/AddTransactionScreen';
 import {Provider} from 'react-redux';
-import store from './src/redux/store';
+import {persistor, store} from './src/redux/store';
+import {PersistGate} from 'redux-persist/integration/react';
 
 const COMMON_HEADER_OPTIONS: NativeStackNavigationOptions = {
   headerBackTitleVisible: false,
@@ -41,29 +42,31 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-        <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen
-              name="HomeScreen"
-              component={HomeScreen}
-              options={{
-                ...COMMON_HEADER_OPTIONS,
-                headerTitle: 'Home',
-              }}
-            />
-            <Stack.Screen
-              name="AddTransactionScreen"
-              component={AddTransactionScreen}
-              options={{
-                ...COMMON_HEADER_OPTIONS,
-                presentation: 'modal',
-                headerTitle: 'ADD TRANSACTION',
-              }}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </SafeAreaProvider>
+      <PersistGate persistor={persistor}>
+        <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+          <NavigationContainer>
+            <Stack.Navigator>
+              <Stack.Screen
+                name="HomeScreen"
+                component={HomeScreen}
+                options={{
+                  ...COMMON_HEADER_OPTIONS,
+                  headerTitle: 'Home',
+                }}
+              />
+              <Stack.Screen
+                name="AddTransactionScreen"
+                component={AddTransactionScreen}
+                options={{
+                  ...COMMON_HEADER_OPTIONS,
+                  presentation: 'modal',
+                  headerTitle: 'ADD TRANSACTION',
+                }}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </SafeAreaProvider>
+      </PersistGate>
     </Provider>
   );
 };
