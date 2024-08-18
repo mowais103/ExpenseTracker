@@ -1,7 +1,6 @@
 import React, {useCallback, useMemo} from 'react';
 import {SectionList, StyleSheet, Text, View} from 'react-native';
 import {AtomScreenContainer} from '../../components/atoms/AtomScreenContainer';
-import {AtomIcon} from '../../components/atoms/AtomIcon';
 import {IncomeStatement} from './IncomeStatement';
 import {AddTransactionButton} from './AddTransactionButton';
 import {RootStackScreenProps} from '../../../App';
@@ -9,10 +8,11 @@ import {Spacer} from '../../components/atoms/Spacer';
 import {useAppDispatch, useAppSelector} from '../../lib/hooks/common';
 import {getSectionListForTransactions} from './utils';
 import {ListItem} from '../../components/molecules/ListItem';
-import {Colors, FontSizes} from '../../styles/common';
+import {Colors, FontSizes, HEIGHT} from '../../styles/common';
 import {Divider} from '../../components/atoms/Divider';
 import moment from 'moment';
 import {deleteTransaction} from '../../redux/actions/transaction';
+import PieChart from 'react-native-pie-chart';
 
 type HomeScreenProps = RootStackScreenProps<'HomeScreen'>;
 
@@ -68,12 +68,21 @@ const HomeScreen = ({navigation}: HomeScreenProps) => {
     [onDeleteTransaction],
   );
 
+  const widthAndHeight = HEIGHT * 0.1;
+  const series = [income, expense, balance];
+  const sliceColor = [Colors.darkGreen, Colors.red, Colors.navyBlue];
+
   return (
     <AtomScreenContainer>
       <View style={styles.header}>
         <Text style={styles.monthStyle}>{getCurrentMonth}</Text>
-        <AtomIcon icon="pieChart" size="medium" />
+        <PieChart
+          widthAndHeight={widthAndHeight}
+          series={series}
+          sliceColor={sliceColor}
+        />
       </View>
+      <Spacer vertical />
       <IncomeStatement balance={balance} expense={expense} income={income} />
       <Spacer vertical />
       <SectionList
@@ -96,7 +105,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingBottom: 15,
+    alignItems: 'center',
   },
   monthStyle: {
     fontSize: FontSizes.xl,

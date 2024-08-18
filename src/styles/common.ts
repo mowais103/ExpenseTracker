@@ -1,4 +1,7 @@
+import {Dimensions} from 'react-native';
 import {TFontSize, TIconSize} from '../types/common';
+
+const {width: WIDTH, height: HEIGHT} = Dimensions.get('screen');
 
 const Colors = {
   white: '#FFFFFF',
@@ -33,4 +36,4 @@ const IconSizes: Record<TIconSize, number> = {
   xxl: 32,
 };
 
-export {Colors, FontSizes, IconSizes};
+export {Colors, FontSizes, IconSizes, WIDTH, HEIGHT};
