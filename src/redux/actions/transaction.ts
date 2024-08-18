@@ -4,8 +4,7 @@ import {AppThunk} from '../store';
 
 export const addTransaction = transaction => (dispatch: AppThunk) => {
   const id = Math.floor(Math.random() * 600000);
-
-  const date = moment().unix();
+  const date = moment().format('D, MM, YYYY');
 
   dispatch({
     type: actions.ADD_TRANSACTION,
