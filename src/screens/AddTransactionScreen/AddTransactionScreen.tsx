@@ -10,7 +10,7 @@ import {
 import {AtomInput} from '../../components/atoms/AtomInput';
 import {AtomScreenContainer} from '../../components/atoms/AtomScreenContainer';
 import {AtomIcon} from '../../components/atoms/AtomIcon';
-import {Colors} from '../../styles/common';
+import {Colors, FontSizes} from '../../styles/common';
 import {Spacer} from '../../components/atoms/Spacer';
 import {AtomButton} from '../../components/atoms/AtomButton';
 import {addTransaction} from '../../redux/actions/transaction';
@@ -21,7 +21,7 @@ type AddTransactionScreenProps = RootStackScreenProps<'AddTransactionScreen'>;
 
 const styles = StyleSheet.create({
   label: {
-    fontSize: 16,
+    fontSize: FontSizes.medium,
     paddingVertical: 5,
     color: Colors.darkBlue,
     fontWeight: 'bold',
