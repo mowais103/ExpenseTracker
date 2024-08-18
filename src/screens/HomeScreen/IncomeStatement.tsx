@@ -1,10 +1,11 @@
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
+import {Colors} from '../../styles/common';
 
 type IncomeStatementProps = {
-  Income: string;
-  Expense: string;
-  Balance: string;
+  income: string;
+  expense: number;
+  balance: string;
 };
 
 const styles = StyleSheet.create({
@@ -12,7 +13,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingVertical: 15,
-    flex: 1,
   },
   header: {
     fontWeight: '500',
@@ -22,26 +22,36 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     fontSize: 14,
     textAlign: 'center',
+    fontWeight: 'bold',
+  },
+  incomeTextColor: {
+    color: Colors.darkGreen,
+  },
+  expenseTextColor: {
+    color: Colors.red,
+  },
+  balanceTextColor: {
+    color: Colors.navyBlue,
   },
 });
 
-const IncomeStatement = ({Income, Expense, Balance}: IncomeStatementProps) => (
-  <>
-    <View style={styles.container}>
-      <View>
-        <Text style={styles.header}>Income</Text>
-        <Text style={styles.text}>435</Text>
-      </View>
-      <View>
-        <Text style={styles.header}>Expense</Text>
-        <Text style={styles.text}>435</Text>
-      </View>
-      <View>
-        <Text style={styles.header}>Balance</Text>
-        <Text style={styles.text}>435</Text>
-      </View>
+const IncomeStatement = ({income, expense, balance}: IncomeStatementProps) => (
+  <View style={styles.container}>
+    <View>
+      <Text style={styles.header}>Income</Text>
+      <Text style={[styles.text, styles.incomeTextColor]}>{`$ ${income}`}</Text>
     </View>
-  </>
+    <View>
+      <Text style={styles.header}>Expense</Text>
+      <Text
+        style={[styles.text, styles.expenseTextColor]}>{`$ ${expense}`}</Text>
+    </View>
+    <View>
+      <Text style={styles.header}>Balance</Text>
+      <Text
+        style={[styles.text, styles.balanceTextColor]}>{`$ ${balance}`}</Text>
+    </View>
+  </View>
 );
 
 export {IncomeStatement};
