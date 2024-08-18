@@ -1,12 +1,12 @@
 import React from 'react';
-import {StyleSheet, View, TouchableOpacity, Text} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import {AtomIcon} from '../../components/atoms/AtomIcon';
 import {Icons} from '../../assets/icons';
 import {Colors} from '../../styles/common';
 
 type ListItemProps = {
   RightComponent?: React.ReactNode;
-  onPress?: () => void;
+  onPressDelete: (id: string) => void;
   backgroundColor?: any;
   title: string;
   subTitle?: string;
@@ -27,16 +27,14 @@ const styles = StyleSheet.create({
   leftComponentContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    width: '60%',
   },
   rightComponentContainer: {
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
+    width: '30%',
     flex: 1,
-  },
-  titleContainer: {
-    flex: 1,
-    maxWidth: '70%',
   },
   iconContainer: {
     justifyContent: 'center',
@@ -47,18 +45,22 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'semibold',
   },
+  amount: {
+    fontSize: 16,
+    fontWeight: 'semibold',
+    width: '50%',
+  },
 });
 
 const ListItem = ({
-  onPress,
   icon,
   title,
   subTitle,
   amount,
   trsType,
+  onPressDelete,
 }: ListItemProps) => (
-  <TouchableOpacity
-    onPress={onPress}
+  <View
     style={[
       styles.container,
       trsType === 'credit'
@@ -69,14 +71,15 @@ const ListItem = ({
       <View style={styles.iconContainer}>
         {icon ? <AtomIcon icon={icon} size="xs" /> : null}
       </View>
-      <View style={styles.titleContainer}>
-        <Text style={styles.text}>{title}</Text>
-        {subTitle ? <Text>{subTitle}</Text> : null}
-      </View>
+      <Text style={styles.text}>{title}</Text>
+      {subTitle ? <Text>{subTitle}</Text> : null}
     </View>
     {amount ? (
       <View style={styles.rightComponentContainer}>
-        <Text style={styles.text}>{amount}</Text>
+        <Text style={styles.amount}>{amount}</Text>
+        <TouchableOpacity onPress={id => onPressDelete(id)}>
+          <AtomIcon icon="trash" size="medium" tintColor={Colors.navyBlue} />
+        </TouchableOpacity>
         {trsType === 'debit' ? (
           <AtomIcon icon="arrowUp" size="small" tintColor={Colors.darkRed} />
         ) : (
@@ -84,7 +87,7 @@ const ListItem = ({
         )}
       </View>
     ) : null}
-  </TouchableOpacity>
+  </View>
 );
 
 export {ListItem};

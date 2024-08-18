@@ -9,6 +9,14 @@ export const transactionsReducer = (state = INITIAL_STATE, action) => {
     case actions.ADD_TRANSACTION:
       return {...state, transactions: [...state.transactions, action.payload]};
 
+    case actions.REMOVE_TRANSACTION:
+      return {
+        ...state,
+        transactions: state.transactions.filter(
+          trs => trs.id !== action.payload,
+        ),
+      };
+
     default:
       return state;
   }
