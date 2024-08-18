@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: Colors.greyishBlue,
+    backgroundColor: Colors.navyBlue,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
 const AddTransactionButton = ({onPress}: AddTransactionButtonProps) => (
   <View style={styles.container}>
     <TouchableOpacity style={styles.addIconContainer} onPress={onPress}>
-      <AtomIcon icon="add" size="large" tintColor={Colors.navyBlue} />
+      <AtomIcon icon="add" size="large" tintColor={Colors.greyishBlue} />
     </TouchableOpacity>
   </View>
 );

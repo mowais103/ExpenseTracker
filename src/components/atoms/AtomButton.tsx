@@ -7,7 +7,7 @@ import {
   TextProps,
   ActivityIndicator,
 } from 'react-native';
-import {Colors} from '../../styles/common';
+import {Colors, FontSizes} from '../../styles/common';
 
 type AtomButtonProps = {
   onPress: () => void;
@@ -33,6 +33,7 @@ const AtomButton = ({
 
   return (
     <TouchableOpacity
+      activeOpacity={0.7}
       style={[styles.button, style]}
       onPress={onPress}
       disabled={isDisabled}
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
     width: '90%',
   },
   text: {
-    fontSize: 16,
+    fontSize: FontSizes.medium,
     fontWeight: 'bold',
     letterSpacing: 0.25,
     color: 'white',

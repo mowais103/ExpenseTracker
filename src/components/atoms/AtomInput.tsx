@@ -14,11 +14,12 @@ interface AtomInputProps extends Partial<TextInputProps> {
 const styles = StyleSheet.create({
   input: {
     flex: 1,
+    padding: 16,
   },
   inputContainer: {
     borderWidth: 1,
     borderColor: Colors.navyBlue,
-    padding: 16,
+    paddingHorizontal: 16,
     width: '90%',
     borderRadius: 5,
     margin: 12,
