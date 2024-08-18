@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 6,
     marginTop: 10,
-    backgroundColor: Colors.greyishBlue,
   },
   leftComponentContainer: {
     flexDirection: 'row',
@@ -31,6 +30,7 @@ const styles = StyleSheet.create({
   },
   rightComponentContainer: {
     justifyContent: 'space-between',
+    alignItems: 'center',
     flexDirection: 'row',
     flex: 1,
   },
@@ -57,7 +57,14 @@ const ListItem = ({
   amount,
   trsType,
 }: ListItemProps) => (
-  <TouchableOpacity onPress={onPress} style={styles.container}>
+  <TouchableOpacity
+    onPress={onPress}
+    style={[
+      styles.container,
+      trsType === 'credit'
+        ? {backgroundColor: Colors.limeGreen}
+        : {backgroundColor: Colors.red},
+    ]}>
     <View style={styles.leftComponentContainer}>
       <View style={styles.iconContainer}>
         {icon ? <AtomIcon icon={icon} size="xs" /> : null}
@@ -71,7 +78,7 @@ const ListItem = ({
       <View style={styles.rightComponentContainer}>
         <Text style={styles.text}>{amount}</Text>
         {trsType === 'debit' ? (
-          <AtomIcon icon="arrowUp" size="small" tintColor={Colors.red} />
+          <AtomIcon icon="arrowUp" size="small" tintColor={Colors.darkRed} />
         ) : (
           <AtomIcon icon="arrowDown" size="small" tintColor={Colors.green} />
         )}
