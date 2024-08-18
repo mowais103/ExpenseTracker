@@ -33,6 +33,7 @@ const AtomButton = ({
 
   return (
     <TouchableOpacity
+      activeOpacity={0.7}
       style={[styles.button, style]}
       onPress={onPress}
       disabled={isDisabled}
