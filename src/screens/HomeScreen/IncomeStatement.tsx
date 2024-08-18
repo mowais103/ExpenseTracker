@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
-import {Colors} from '../../styles/common';
+import {Colors, FontSizes} from '../../styles/common';
 
 type IncomeStatementProps = {
   income: string;
@@ -16,11 +16,11 @@ const styles = StyleSheet.create({
   },
   header: {
     fontWeight: '500',
-    fontSize: 16,
+    fontSize: FontSizes.medium,
   },
   text: {
     paddingTop: 5,
-    fontSize: 14,
+    fontSize: FontSizes.medium,
     textAlign: 'center',
     fontWeight: 'bold',
   },
