@@ -9,6 +9,7 @@ const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
   stateReconciler: autoMergeLevel2,
+  version: 1,
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);
