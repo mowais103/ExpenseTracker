@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: StyleSheet.hairlineWidth,
-    backgroundColor: Colors.creamGrey,
+    backgroundColor: Colors.grey,
   },
 });
 

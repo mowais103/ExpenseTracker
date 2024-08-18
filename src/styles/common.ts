@@ -8,6 +8,11 @@ const Colors = {
   darkBlue: '#031026',
   navyBlue: '#2a3991',
   grey: '#7F7F7F',
+  green: '#98FB98',
+  red: '#FF0000',
+  darkGreen: '#006400',
+  darkRed: '#8B0000',
+  limeGreen: '#008000',
 };
 
 const FontSizes: Record<TFontSize, number> = {
@@ -15,7 +20,7 @@ const FontSizes: Record<TFontSize, number> = {
   small: 12,
   medium: 16,
   large: 20,
-  xl: 26,
+  xl: 24,
   xxl: 32,
 };
 
