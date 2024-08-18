@@ -5,6 +5,7 @@ const Icons = {
   dollar: require('./dollar.png'),
   arrowUp: require('./arrowUp.png'),
   arrowDown: require('./arrowDown.png'),
+  trash: require('./trash.png'),
 };
 
 export {Icons};

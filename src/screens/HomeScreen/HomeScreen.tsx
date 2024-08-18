@@ -6,12 +6,13 @@ import {IncomeStatement} from './IncomeStatement';
 import {AddTransactionButton} from './AddTransactionButton';
 import {RootStackScreenProps} from '../../../App';
 import {Spacer} from '../../components/atoms/Spacer';
-import {useAppSelector} from '../../lib/hooks/common';
+import {useAppDispatch, useAppSelector} from '../../lib/hooks/common';
 import {getSectionListForTransactions} from './utils';
 import {ListItem} from '../../components/molecules/ListItem';
 import {Colors, FontSizes} from '../../styles/common';
 import {Divider} from '../../components/atoms/Divider';
 import moment from 'moment';
+import {deleteTransaction} from '../../redux/actions/transaction';
 
 type HomeScreenProps = RootStackScreenProps<'HomeScreen'>;
 
@@ -24,6 +25,8 @@ const SectionSeparatorComponent = () => (
 const getCurrentMonth = moment().format('MMMM');
 
 const HomeScreen = ({navigation}: HomeScreenProps) => {
+  const dispatch = useAppDispatch();
+
   const transactions = useAppSelector(
     state => state.transactionsReducer.transactions,
   );
@@ -41,6 +44,13 @@ const HomeScreen = ({navigation}: HomeScreenProps) => {
     [transactions],
   );
 
+  const onDeleteTransaction = useCallback(
+    (id: string) => {
+      dispatch(deleteTransaction(id));
+    },
+    [dispatch],
+  );
+
   const renderSectionHeader = useCallback(
     ({section: {date}}) => <Text style={styles.date}>{date}</Text>,
     [],
@@ -52,9 +62,10 @@ const HomeScreen = ({navigation}: HomeScreenProps) => {
         title={item.title}
         amount={`$ ${item.amount}`}
         trsType={item.transactionType}
+        onPressDelete={() => onDeleteTransaction(item.id)}
       />
     ),
-    [],
+    [onDeleteTransaction],
   );
 
   return (
