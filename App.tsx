@@ -17,6 +17,7 @@ import {AddTransactionScreen} from './src/screens/AddTransactionScreen/AddTransa
 import {Provider} from 'react-redux';
 import {persistor, store} from './src/redux/store';
 import {PersistGate} from 'redux-persist/integration/react';
+import {Login} from './src/screens/Login/Login';
 
 const COMMON_HEADER_OPTIONS: NativeStackNavigationOptions = {
   headerBackTitleVisible: false,
@@ -27,6 +28,7 @@ const COMMON_HEADER_OPTIONS: NativeStackNavigationOptions = {
 };
 
 type RootStackParamList = {
+  Login: undefined;
   HomeScreen: undefined;
   AddTransactionScreen: undefined;
 };
@@ -45,7 +47,12 @@ const App = () => {
       <PersistGate persistor={persistor}>
         <SafeAreaProvider initialMetrics={initialWindowMetrics}>
           <NavigationContainer>
-            <Stack.Navigator>
+            <Stack.Navigator initialRouteName="Login">
+              <Stack.Screen
+                name="Login"
+                component={Login}
+                options={{headerShown: false}}
+              />
               <Stack.Screen
                 name="HomeScreen"
                 component={HomeScreen}
