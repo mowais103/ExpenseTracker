@@ -1,12 +1,12 @@
 // @flow
 
-import React, {useState, useEffect, useCallback} from 'react';
+import React, {useState, useEffect, useCallback, useRef} from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
-import {StyleSheet, Text, View} from 'react-native';
+import {Animated, StyleSheet, Text, View} from 'react-native';
 import {AtomScreenContainer} from '../../components/atoms/AtomScreenContainer';
 import {AtomInput} from '../../components/atoms/AtomInput';
 import {AtomButton} from '../../components/atoms/AtomButton';
-import {Colors} from '../../styles/common';
+import {Colors, FontSizes} from '../../styles/common';
 import {RootStackScreenProps} from '../../../App';
 import {checkUserInStorage} from '../../redux/actions/auth';
 import {useAppDispatch, useAppSelector} from '../../lib/hooks/common';
@@ -19,6 +19,7 @@ const Login = ({navigation}: LoginScreenProps) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const animatedValue = useRef(new Animated.Value(0)).current;
 
   const dispatch = useAppDispatch();
 
@@ -61,6 +62,26 @@ const Login = ({navigation}: LoginScreenProps) => {
     checkForLoggedInUser();
   }, [checkForLoggedInUser]);
 
+  const moveRightX = useCallback(() => {
+    Animated.timing(animatedValue, {
+      toValue: 20,
+      duration: 4000,
+      useNativeDriver: false,
+    }).start(moveLeftX);
+  }, [animatedValue]);
+
+  const moveLeftX = useCallback(() => {
+    Animated.timing(animatedValue, {
+      toValue: -20,
+      duration: 4000,
+      useNativeDriver: false,
+    }).start(moveRightX);
+  }, [animatedValue, moveRightX]);
+
+  useEffect(() => {
+    moveRightX();
+  }, [moveRightX]);
+
   if (!hasChecked) {
     return null;
   }
@@ -68,7 +89,15 @@ const Login = ({navigation}: LoginScreenProps) => {
   return (
     <AtomScreenContainer>
       <View style={styles.container}>
-        <Text style={{fontSize: 32, paddingBottom: 24}}>Expense Tracker</Text>
+        <Animated.Text
+          style={[
+            styles.animatedText,
+            {
+              transform: [{translateX: animatedValue}],
+            },
+          ]}>
+          Expense Tracker
+        </Animated.Text>
         <AtomInput
           value={email}
           spellCheck={false}
@@ -85,6 +114,7 @@ const Login = ({navigation}: LoginScreenProps) => {
           autoCapitalize="none"
           secureTextEntry
         />
+        <Spacer vertical />
         <AtomButton
           title="Login"
           onPress={onLogin}
@@ -117,6 +147,12 @@ const styles = StyleSheet.create({
   },
   errorText: {
     color: Colors.red,
+  },
+  animatedText: {
+    fontSize: FontSizes.xxl,
+    paddingBottom: 24,
+    color: Colors.navyBlue,
+    fontWeight: 'bold',
   },
 });
 
