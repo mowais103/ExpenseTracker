@@ -51,7 +51,7 @@ const Login = ({navigation}: LoginScreenProps) => {
 
   const checkForLoggedInUser = useCallback(async () => {
     const savedUser = await AsyncStorage.getItem('validUser');
-    if (savedUser === null) {
+    if (savedUser !== null) {
       navigation.navigate('HomeScreen');
     } else {
       checkForUser(true);
