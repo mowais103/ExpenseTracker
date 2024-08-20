@@ -11,11 +11,11 @@ import {AtomInput} from '../../components/atoms/AtomInput';
 import {AtomScreenContainer} from '../../components/atoms/AtomScreenContainer';
 import {AtomIcon} from '../../components/atoms/AtomIcon';
 import {Colors, FontSizes} from '../../styles/common';
-import {Spacer} from '../../components/atoms/Spacer';
 import {AtomButton} from '../../components/atoms/AtomButton';
 import {addTransaction} from '../../redux/actions/transaction';
 import {useAppDispatch} from '../../lib/hooks/common';
 import {RootStackScreenProps} from '../../../App';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 type AddTransactionScreenProps = RootStackScreenProps<'AddTransactionScreen'>;
 
@@ -27,9 +27,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   buttonContainer: {
-    justifyContent: 'flex-end',
     alignItems: 'center',
-    flex: 0.8,
+    flex: 0.4,
   },
   disabledButtonStyle: {
     backgroundColor: Colors.grey,
@@ -38,7 +37,18 @@ const styles = StyleSheet.create({
   keyboardAvoidingView: {
     flex: 1,
   },
+  dropDown: {
+    flex: 1,
+    margin: 12,
+    paddingTop: 8,
+    width: '90%',
+  },
 });
+
+const transactionTypePickerData = [
+  {label: 'Credit', value: 'credit'},
+  {label: 'Debit', value: 'debit'},
+];
 
 const AddTransactionScreen = ({navigation}: AddTransactionScreenProps) => {
   const [amount, setAmount] = useState('');
@@ -47,6 +57,8 @@ const AddTransactionScreen = ({navigation}: AddTransactionScreenProps) => {
     string | 'debit' | 'credit'
   >('credit');
   const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [items, setItems] = useState(transactionTypePickerData);
 
   const dispatch = useAppDispatch();
 
@@ -96,15 +108,16 @@ const AddTransactionScreen = ({navigation}: AddTransactionScreenProps) => {
           onChangeText={amount => setAmount(amount)}
         />
         <Text style={styles.label}>Transaction Type</Text>
-        <AtomInput
-          value={transactionType}
-          keyboardType="numeric"
-          spellCheck={false}
-          placeholder="Debit or Credit"
-          LeftElement={<AtomIcon icon="marker" size="medium" />}
-          onChangeText={type => setTransactionType(type)}
-        />
-        <Spacer vertical />
+        <View style={styles.dropDown}>
+          <DropDownPicker
+            open={open}
+            value={transactionType}
+            items={items}
+            setOpen={setOpen}
+            setValue={setTransactionType}
+            setItems={setItems}
+          />
+        </View>
         <View style={styles.buttonContainer}>
           <AtomButton
             title="Add Transaction"
