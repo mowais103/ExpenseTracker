@@ -93,7 +93,7 @@ const HomeScreen = ({navigation}: HomeScreenProps) => {
     <AtomScreenContainer>
       <Header onPressLogout={onLogout} />
       <View style={styles.header}>
-        <Text style={styles.monthStyle}>{getCurrentMonth}</Text>
+        <Text style={styles.monthStyle}>{getCurrentMonth.toUpperCase()}</Text>
         <PieChart
           widthAndHeight={widthAndHeight}
           series={series}
