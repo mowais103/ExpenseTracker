@@ -43,9 +43,9 @@ const App = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
 
   return (
-    <Provider store={store}>
-      <PersistGate persistor={persistor}>
-        <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+    <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>
           <NavigationContainer>
             <Stack.Navigator
               initialRouteName="Login"
@@ -77,9 +77,9 @@ const App = () => {
               />
             </Stack.Navigator>
           </NavigationContainer>
-        </SafeAreaProvider>
-      </PersistGate>
-    </Provider>
+        </PersistGate>
+      </Provider>
+    </SafeAreaProvider>
   );
 };
 

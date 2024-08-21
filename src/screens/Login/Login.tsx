@@ -87,7 +87,7 @@ const Login = ({navigation}: LoginScreenProps) => {
   }
 
   return (
-    <AtomScreenContainer>
+    <AtomScreenContainer style={styles.screenContainer}>
       <View style={styles.container}>
         <Animated.Text
           style={[
@@ -105,6 +105,7 @@ const Login = ({navigation}: LoginScreenProps) => {
           onChangeText={setEmail}
           autoFocus
           autoCapitalize="none"
+          placeholderTextColor={Colors.white}
         />
         <AtomInput
           value={password}
@@ -113,6 +114,7 @@ const Login = ({navigation}: LoginScreenProps) => {
           onChangeText={setPassword}
           autoCapitalize="none"
           secureTextEntry
+          placeholderTextColor={Colors.white}
         />
         <Spacer vertical />
         <AtomButton
@@ -126,8 +128,8 @@ const Login = ({navigation}: LoginScreenProps) => {
           <Text style={styles.errorText}>Invalid username or password</Text>
         )}
         <View style={styles.hintContainer}>
-          <Text>username: test@test.com</Text>
-          <Text>password: tester</Text>
+          <Text style={styles.hintText}>username: test@test.com</Text>
+          <Text style={styles.hintText}>password: tester</Text>
         </View>
       </View>
     </AtomScreenContainer>
@@ -153,6 +155,13 @@ const styles = StyleSheet.create({
     paddingBottom: 24,
     color: Colors.navyBlue,
     fontWeight: 'bold',
+  },
+  screenContainer: {
+    backgroundColor: Colors.darkBlue,
+    marginHorizontal: 0,
+  },
+  hintText: {
+    color: Colors.white,
   },
 });
 
