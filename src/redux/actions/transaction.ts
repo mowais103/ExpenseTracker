@@ -18,3 +18,9 @@ export const deleteTransaction = (id: string) => (dispatch: AppThunk) => {
     payload: id,
   });
 };
+
+export const resetTransactions = () => (dispatch: AppThunk) => {
+  dispatch({
+    type: actions.RESET_TRANSACTIONS,
+  });
+};
