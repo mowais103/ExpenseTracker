@@ -1,5 +1,11 @@
 import React, {useCallback, useMemo} from 'react';
-import {SectionList, StyleSheet, Text, View} from 'react-native';
+import {
+  LayoutAnimation,
+  SectionList,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import {AtomScreenContainer} from '../../components/atoms/AtomScreenContainer';
 import {IncomeStatement} from './IncomeStatement';
 import {AddTransactionButton} from './AddTransactionButton';
@@ -11,7 +17,10 @@ import {ListItem} from '../../components/molecules/ListItem';
 import {Colors, FontSizes, HEIGHT} from '../../styles/common';
 import {Divider} from '../../components/atoms/Divider';
 import moment from 'moment';
-import {deleteTransaction} from '../../redux/actions/transaction';
+import {
+  deleteTransaction,
+  resetTransactions,
+} from '../../redux/actions/transaction';
 import PieChart from 'react-native-pie-chart';
 import {useDisableBackHandler} from '../../lib/hooks/useDisableBackHandler';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -55,7 +64,7 @@ const HomeScreen = ({navigation}: HomeScreenProps) => {
   );
 
   const transactionsSectionList = useMemo(
-    () => getSectionListForTransactions(transactions),
+    () => (transactions ? getSectionListForTransactions(transactions) : null),
     [transactions],
   );
 
@@ -89,16 +98,24 @@ const HomeScreen = ({navigation}: HomeScreenProps) => {
     navigation.navigate('Login');
   }, [checkForUser, navigation]);
 
+  const onReset = useCallback(() => {
+    dispatch(resetTransactions());
+    LayoutAnimation.easeInEaseOut();
+  }, [dispatch]);
+
   return (
     <AtomScreenContainer>
-      <Header onPressLogout={onLogout} />
+      <Header onPressLogout={onLogout} onPressReset={onReset} />
       <View style={styles.header}>
         <Text style={styles.monthStyle}>{getCurrentMonth.toUpperCase()}</Text>
-        <PieChart
-          widthAndHeight={widthAndHeight}
-          series={series}
-          sliceColor={sliceColor}
-        />
+        {amounts.length ? (
+          <PieChart
+            widthAndHeight={widthAndHeight}
+            series={series}
+            sliceColor={sliceColor}
+            coverRadius={0.4}
+          />
+        ) : null}
       </View>
       <Spacer vertical />
       <IncomeStatement balance={balance} expense={expense} income={income} />

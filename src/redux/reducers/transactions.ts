@@ -17,6 +17,9 @@ export const transactionsReducer = (state = INITIAL_STATE, action) => {
         ),
       };
 
+    case actions.RESET_TRANSACTIONS:
+      return {...state, transactions: []};
+
     default:
       return state;
   }
