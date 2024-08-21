@@ -13,6 +13,7 @@ import {Divider} from '../../components/atoms/Divider';
 import moment from 'moment';
 import {deleteTransaction} from '../../redux/actions/transaction';
 import PieChart from 'react-native-pie-chart';
+import {useDisableBackHandler} from '../../lib/hooks/useDisableBackHandler';
 
 type HomeScreenProps = RootStackScreenProps<'HomeScreen'>;
 
@@ -26,6 +27,8 @@ const getCurrentMonth = moment().format('MMMM');
 
 const HomeScreen = ({navigation}: HomeScreenProps) => {
   const dispatch = useAppDispatch();
+
+  useDisableBackHandler(); // disable back handler
 
   const transactions = useAppSelector(
     state => state.transactionsReducer.transactions,

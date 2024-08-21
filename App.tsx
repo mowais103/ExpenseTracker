@@ -47,7 +47,12 @@ const App = () => {
       <PersistGate persistor={persistor}>
         <SafeAreaProvider initialMetrics={initialWindowMetrics}>
           <NavigationContainer>
-            <Stack.Navigator initialRouteName="Login">
+            <Stack.Navigator
+              initialRouteName="Login"
+              screenOptions={{
+                ...COMMON_HEADER_OPTIONS,
+                gestureEnabled: false,
+              }}>
               <Stack.Screen
                 name="Login"
                 component={Login}
@@ -57,17 +62,17 @@ const App = () => {
                 name="HomeScreen"
                 component={HomeScreen}
                 options={{
-                  ...COMMON_HEADER_OPTIONS,
                   headerTitle: 'Home',
+                  headerBackVisible: false,
                 }}
               />
               <Stack.Screen
                 name="AddTransactionScreen"
                 component={AddTransactionScreen}
                 options={{
-                  ...COMMON_HEADER_OPTIONS,
                   presentation: 'modal',
                   headerTitle: 'ADD TRANSACTION',
+                  gestureEnabled: true,
                 }}
               />
             </Stack.Navigator>
