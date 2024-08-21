@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
   },
   keyboardAvoidingView: {
     flex: 1,
+    paddingTop: 24,
   },
   dropDown: {
     flex: 1,

@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     padding: 16,
-    color: Colors.white,
   },
   inputContainer: {
     borderWidth: 1,

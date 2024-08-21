@@ -26,6 +26,8 @@ const styles = StyleSheet.create({
   },
   button: {
     width: '25%',
+    padding: 8,
+    borderRadius: 6,
   },
 });
 

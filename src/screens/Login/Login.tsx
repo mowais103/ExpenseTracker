@@ -106,6 +106,7 @@ const Login = ({navigation}: LoginScreenProps) => {
           autoFocus
           autoCapitalize="none"
           placeholderTextColor={Colors.white}
+          style={styles.input}
         />
         <AtomInput
           value={password}
@@ -115,6 +116,8 @@ const Login = ({navigation}: LoginScreenProps) => {
           autoCapitalize="none"
           secureTextEntry
           placeholderTextColor={Colors.white}
+          style={styles.input}
+          onSubmitEditing={onLogin}
         />
         <Spacer vertical />
         <AtomButton
@@ -161,6 +164,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 0,
   },
   hintText: {
+    color: Colors.white,
+  },
+  input: {
     color: Colors.white,
   },
 });
