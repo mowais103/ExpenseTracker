@@ -14,6 +14,9 @@ import moment from 'moment';
 import {deleteTransaction} from '../../redux/actions/transaction';
 import PieChart from 'react-native-pie-chart';
 import {useDisableBackHandler} from '../../lib/hooks/useDisableBackHandler';
+import AsyncStorage from '@react-native-community/async-storage';
+import {checkUserInStorage} from '../../redux/actions/auth';
+import {Header} from './Header';
 
 type HomeScreenProps = RootStackScreenProps<'HomeScreen'>;
 
@@ -41,6 +44,15 @@ const HomeScreen = ({navigation}: HomeScreenProps) => {
     -1;
 
   const income = expense + balance;
+
+  const widthAndHeight = HEIGHT * 0.12;
+  const series = [income, expense, balance];
+  const sliceColor = [Colors.darkGreen, Colors.red, Colors.navyBlue];
+
+  const checkForUser = useCallback(
+    (hasChecked: boolean) => dispatch(checkUserInStorage(hasChecked)),
+    [dispatch],
+  );
 
   const transactionsSectionList = useMemo(
     () => getSectionListForTransactions(transactions),
@@ -71,12 +83,15 @@ const HomeScreen = ({navigation}: HomeScreenProps) => {
     [onDeleteTransaction],
   );
 
-  const widthAndHeight = HEIGHT * 0.1;
-  const series = [income, expense, balance];
-  const sliceColor = [Colors.darkGreen, Colors.red, Colors.navyBlue];
+  const onLogout = useCallback(async () => {
+    await AsyncStorage.removeItem('validUser');
+    checkForUser(false);
+    navigation.navigate('Login');
+  }, [checkForUser, navigation]);
 
   return (
     <AtomScreenContainer>
+      <Header onPressLogout={onLogout} />
       <View style={styles.header}>
         <Text style={styles.monthStyle}>{getCurrentMonth}</Text>
         <PieChart
@@ -109,6 +124,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    paddingVertical: 12,
   },
   monthStyle: {
     fontSize: FontSizes.xl,

@@ -1,7 +1,5 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {Colors} from '../../styles/common';
+import {StyleSheet, SafeAreaView} from 'react-native';
 
 type AtomScreenContainerProps = {
   children: React.ReactNode;
@@ -10,15 +8,12 @@ type AtomScreenContainerProps = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.white,
-    paddingHorizontal: 15,
+    marginHorizontal: 15,
   },
 });
 
 const AtomScreenContainer = ({children}: AtomScreenContainerProps) => (
-  <SafeAreaView style={styles.container} edges={['top']}>
-    {children}
-  </SafeAreaView>
+  <SafeAreaView style={styles.container}>{children}</SafeAreaView>
 );
 
 export {AtomScreenContainer};
